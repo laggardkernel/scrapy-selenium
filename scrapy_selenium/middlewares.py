@@ -100,6 +100,8 @@ class SeleniumMiddleware:
         if not isinstance(request, SeleniumRequest):
             return None
 
+        request.unpack_meta()
+
         self.driver.get(request.url)
 
         for cookie_name, cookie_value in request.cookies.items():
@@ -137,4 +139,3 @@ class SeleniumMiddleware:
         """Shutdown the driver when spider is closed"""
 
         self.driver.quit()
-
